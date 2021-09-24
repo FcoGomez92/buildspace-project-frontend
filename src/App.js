@@ -10,6 +10,7 @@ export default function App() {
   const [allWaves, setAllWaves] = React.useState([]);
   const [message, setMessage] = React.useState("");
   const [error, setError] = React.useState("");
+  const [connectionError, setConnectionError] = React.useState("");
   const contractAddress = "0xEFc26673128cd281F0B170c2028C3a318051C675";
   const contractABI = abi.abi;
 
@@ -101,6 +102,11 @@ export default function App() {
       contractABI,
       signer
     );
+    const network = await provider.detectNetwork();
+    if (network.chainId !== 4) {
+      setConnectionError("Please connect your wallet to Rinkeby Testnet");
+      return;
+    }
 
     let waves = await wavePortalContract.getAllWaves();
 
@@ -188,6 +194,14 @@ export default function App() {
             >
               {error}
             </p>
+          )}
+          {connectionError && (
+            <div className="errorConnection">
+              <p>
+                Please, connect your wallet to Rinkeby Testnet and refresh the
+                page.
+              </p>
+            </div>
           )}
           {currAccount ? null : (
             <button className="waveButton" onClick={connectWallet}>

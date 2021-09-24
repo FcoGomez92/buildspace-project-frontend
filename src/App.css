@@ -101,3 +101,15 @@
   width: 80%;
   margin: 0;
 }
+.errorConnection {
+  text-align: center;
+  margin: 10px auto 0 auto;
+  width: fit-content;
+  padding: 15px 20px;
+  background-color: #f5e9e9;
+  border-radius: 8px;
+}
+.errorConnection p {
+  margin: 0;
+  color: rgb(177 40 57);
+}
